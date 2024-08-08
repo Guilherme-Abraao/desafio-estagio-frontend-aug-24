@@ -1,4 +1,3 @@
-import React from 'react';
 import { ChatListItemData } from '@/dataset/ChatListItemData';
 import ChatListItem from './ChatListItem';
 
