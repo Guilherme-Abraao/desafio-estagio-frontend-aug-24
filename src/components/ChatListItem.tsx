@@ -1,32 +1,43 @@
 import React from 'react';
-import { ChatListItemData } from '@/dataset/ChatListItemData';
+import ChatListItemInterface from '../components/interfaces/ChatListItemInterface'; 
+import checkmarkOutline from '../assets/checkmark-outline.png'; 
+import checkmarkDoneOutline from '../assets/checkmark-done-outline.png'; 
 
-interface ChatListItemProps {
-    data: ChatListItemData;
-}
+const ChatListItem: React.FC<{ data: ChatListItemInterface }> = ({ data }) => {
+    
+    const formatDate = (timestamp: string) => {
+        const date = new Date(timestamp); 
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        return `${hours}:${minutes}`;
+    };
 
-const ChatListItem: React.FC<ChatListItemProps> = ({ data: chatItemData }) => {
+    // Escolher a imagem com base no valor de `unread`
+    const checkmarkImage = data.unread ? checkmarkOutline : checkmarkDoneOutline;
+
     return (
-        <div className="flex items-center w-96 p-3 border-b bg-[#111B21] hover:bg-[#202C33] cursor-pointer">
+        <div className="flex items-center w-96 p-3 border-b border-[#202C33] bg-[#111B21] hover:bg-[#202C33] cursor-pointer">
             <img
-                src={chatItemData.image}
-                alt={chatItemData.name}
+                src={data.image}
+                alt={data.name}
                 className="w-12 h-12 rounded-full"
             />
 
             <div className="ml-4 flex flex-col justify-between w-full">
                 <div className="flex justify-between">
-                    <div className="text-[#E9EDEF] text-base">{chatItemData.name}</div>
-                    <div className="text-[#8696A0] text-xs flex items-center">{chatItemData.hour}</div>
+                    <div className="text-[#E9EDEF] text-base">{data.name}</div>
+                    <div className="text-[#8696A0] text-xs flex items-center">
+                        {formatDate(data.hour)}
+                    </div>
                 </div>
                 <div className="flex items-center mt-2">
                     <img
-                        src={chatItemData.image}
-                        alt="Icon"
-                        className="h-3 mr-2"
+                        src={checkmarkImage}
+                        alt="Checkmark"
+                        className="w-4 h-4 mr-2" 
                     />
-                    <div className="text-[#8696A0] text-sm font-semibold overflow-hidden text-ellipsis whitespace-nowrap max-w-72">
-                        {chatItemData.conversation}
+                    <div className="text-[#8696A0] text-sm font-semibold overflow-hidden text-ellipsis whitespace-nowrap max-w-[18rem]">
+                        {data.conversation}
                     </div>
                 </div>
             </div>

@@ -1,17 +1,32 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import lupa from '../assets/magnifying-glass-solid.svg';
 import filter from '../assets/filter.png';
-import { ChatListItemData } from '@/dataset/ChatListItemData';
 import ChatListItem from './ChatListItem';
+import ChatListItemInterface from '../components/interfaces/ChatListItemInterface'
 
 const ChatListSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [chatData, setChatData] = useState<ChatListItemInterface[]>([]);
+
+    useEffect(() => {
+        const fetchChatData = async () => {
+            try {
+                const response = await fetch('https://66b4fde59f9169621ea51e5a.mockapi.io/api/desafio-hyerdev/chat-list');
+                const data: ChatListItemInterface[] = await response.json();
+                setChatData(data);
+            } catch (error) {
+                console.error('Erro ao buscar os dados da API:', error);
+            }
+        };
+
+        fetchChatData();
+    }, []);
 
     const filteredChats = useMemo(() => {
-        return ChatListItemData.filter(chat =>
+        return chatData.filter(chat =>
             chat.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
-    }, [searchTerm]);
+    }, [searchTerm, chatData]);
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
@@ -28,7 +43,7 @@ const ChatListSearch = () => {
                     />
                     <input 
                         type="text" 
-                        placeholder='Pesquisar'
+                        placeholder="Pesquisar"
                         value={searchTerm}
                         onChange={handleSearchChange}
                         className="w-full pl-10 pr-3 py-2 bg-transparent text-[#E9EDEF] placeholder-[#8696A0] focus:outline-none rounded-lg"
@@ -45,8 +60,8 @@ const ChatListSearch = () => {
             </div>
 
             <div className="bg-[#111B21]">
-                {filteredChats.map((chat, index) => (
-                    <ChatListItem key={index} data={chat} />
+                {filteredChats.map((chat) => (
+                    <ChatListItem key={chat.id} data={chat} />
                 ))}
             </div>
         </div>
