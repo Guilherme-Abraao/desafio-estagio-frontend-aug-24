@@ -8,7 +8,6 @@ interface ChatListItemProps {
 const ChatListItem: React.FC<ChatListItemProps> = ({ data: chatItemData }) => {
     return (
         <div className="flex items-center w-96 p-3 border-b bg-[#111B21] hover:bg-[#202C33] cursor-pointer">
-
             <img
                 src={chatItemData.image}
                 alt={chatItemData.name}

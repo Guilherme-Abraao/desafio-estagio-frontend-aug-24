@@ -1,10 +1,9 @@
-
-import ChatList from "./components/ChatList";
+import ChatListSearch from './components/ChatListSearch'
 
 function App() {
   return (
     <div> 
-      <ChatList />
+      <ChatListSearch />
     </div>
   );
 }

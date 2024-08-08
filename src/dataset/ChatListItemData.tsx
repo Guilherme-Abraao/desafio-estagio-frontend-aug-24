@@ -1,5 +1,5 @@
 import perfil1 from '../assets/person1.png'
-import perfil2 from '../assets/person1.png'
+import perfil2 from '../assets/person2.png'
 import artfusion from '../assets/art-fusion.png'
 
 export interface ChatListItemData {
@@ -13,7 +13,7 @@ export interface ChatListItemData {
 
 export const ChatListItemData = [
     {
-        image: perfil1,
+        image: perfil2,
         name: 'Guilherme',
         hour: '08:40',
         conversation: 'Bom dia! Preciso que você verifique sua caixa de e-mail e me responda antes da nossa reunião',
