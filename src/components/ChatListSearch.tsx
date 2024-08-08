@@ -2,11 +2,13 @@ import React, { useState, useEffect, useMemo } from 'react';
 import lupa from '../assets/magnifying-glass-solid.svg';
 import filter from '../assets/filter.png';
 import ChatListItem from './ChatListItem';
-import ChatListItemInterface from '../components/interfaces/ChatListItemInterface'
+import ChatListItemInterface from '../components/interfaces/ChatListItemInterface';
+import ChatListFilter from './ChatListFilter'; // Importe o ChatListFilter
 
 const ChatListSearch = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [chatData, setChatData] = useState<ChatListItemInterface[]>([]);
+    const [showFilter, setShowFilter] = useState(false);
 
     useEffect(() => {
         const fetchChatData = async () => {
@@ -50,12 +52,14 @@ const ChatListSearch = () => {
                     />
                 </div>
 
-                <div className="ml-auto pr-3">
+                <div className="relative ml-auto pr-3">
                     <img
                         src={filter}
                         alt="Filtro"
-                        className="h-4 w-4 text-[#8696A0]"
+                        className="h-4 w-4 text-[#8696A0] cursor-pointer"
+                        onClick={() => setShowFilter(!showFilter)} 
                     />
+                    {showFilter && <ChatListFilter />} 
                 </div>
             </div>
 
