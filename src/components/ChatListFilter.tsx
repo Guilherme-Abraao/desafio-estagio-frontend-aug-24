@@ -1,6 +1,7 @@
 import React from 'react';
 import ballon from '../assets/balloon.png';
 import people from '../assets/people.png';
+import allImage from '../assets/chatbubbles-sharp.png';
 import { useChatStore } from '../store/useChatStore';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -48,7 +49,7 @@ const ChatListFilter: React.FC<ChatListFilterProps> = ({ onClose }) => {
           onClick={() => handleFilterChange('')}
           className={`flex items-center p-4 pl-6 text-gray-300 hover:bg-[#2A3B44] cursor-pointer ${filter === '' ? 'bg-[#2A3B44]' : ''}`}
         >
-          <img src={ballon} alt="All" className="w-5 h-5 mr-2" />
+          <img src={allImage} alt="All" className="w-5 h-5 mr-2" />
           Todos
         </li>
       </ul>
