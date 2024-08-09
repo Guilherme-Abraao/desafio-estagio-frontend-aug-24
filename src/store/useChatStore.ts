@@ -1,4 +1,3 @@
-// store/useChatStore.ts
 import { create } from 'zustand';
 
 interface Chat {
@@ -6,7 +5,7 @@ interface Chat {
   name: string;
   conversation: string;
   unread: boolean;
-  group: boolean; // Altere para isGroup
+  group: boolean; 
   image: string;
   hour: string;
 }

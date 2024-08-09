@@ -1,8 +1,9 @@
-// components/ChatListFilter.tsx
+
 import React from 'react';
 import ballon from '../assets/balloon.png';
 import people from '../assets/people.png';
 import { useChatStore } from '../store/useChatStore';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type FilterType = 'unread' | 'group' | '';
 
@@ -11,9 +12,14 @@ const ChatListFilter: React.FC = () => {
     filter: state.filter,
     setFilter: state.setFilter
   }));
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleFilterChange = (filterType: FilterType) => {
     setFilter(filterType);
+    const params = new URLSearchParams(location.search);
+    params.set('filter', filterType);
+    navigate({ search: params.toString() }, { replace: true });
   };
 
   return (

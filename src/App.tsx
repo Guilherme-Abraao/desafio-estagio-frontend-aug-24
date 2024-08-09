@@ -1,11 +1,15 @@
-import ChatListSearch from './components/ChatListSearch'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ChatListSearch from './components/ChatListSearch';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div> 
-      <ChatListSearch />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<ChatListSearch />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
