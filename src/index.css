@@ -59,6 +59,10 @@
   }
 }
 
+body{
+  background-color: #202C33;
+}
+
 @layer base {
   * {
     @apply border-border;

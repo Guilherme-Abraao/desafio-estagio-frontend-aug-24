@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ballon from '../assets/balloon.png';
 import people from '../assets/people.png';
@@ -7,7 +6,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 type FilterType = 'unread' | 'group' | '';
 
-const ChatListFilter: React.FC = () => {
+interface ChatListFilterProps {
+  onClose: () => void;
+}
+
+const ChatListFilter: React.FC<ChatListFilterProps> = ({ onClose }) => {
   const { filter, setFilter } = useChatStore(state => ({
     filter: state.filter,
     setFilter: state.setFilter
@@ -20,10 +23,11 @@ const ChatListFilter: React.FC = () => {
     const params = new URLSearchParams(location.search);
     params.set('filter', filterType);
     navigate({ search: params.toString() }, { replace: true });
+    onClose(); // Fecha o componente após aplicar o filtro
   };
 
   return (
-    <div className="absolute right-0 mt-2 w-60 bg-[#202C33] rounded-md shadow-lg border border-[#2A3B44]">
+    <div className="absolute left-0 mt-2 w-60 bg-[#202C33] rounded-md shadow-lg border border-[#2A3B44]">
       <div className="p-4 text-gray-300 font-semibold">Conversas</div>
       <ul>
         <li
